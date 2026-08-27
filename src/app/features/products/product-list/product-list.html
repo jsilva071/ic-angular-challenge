@@ -1,0 +1,64 @@
+<div class="page-head">
+  <h1>Catalog</h1>
+  <p class="page-head__lead">Browse products from the Fake Store API.</p>
+</div>
+
+<app-async-state
+  [loading]="query().isPending"
+  [error]="query().isError ? query().error : null"
+  loadingLabel="Loading products…"
+  errorLabel="Couldn't load the catalog"
+  (retry)="refetch()"
+>
+  <section class="filters" aria-label="Filter products">
+    <div class="filters__field">
+      <label for="search">Search</label>
+      <input
+        id="search"
+        type="search"
+        name="search"
+        placeholder="Search by title or description"
+        [value]="search()"
+        (input)="onSearch($any($event.target).value)"
+        autocomplete="off"
+      />
+    </div>
+
+    <div class="filters__field">
+      <label for="category">Category</label>
+      <select
+        id="category"
+        name="category"
+        [value]="category()"
+        (change)="onCategory($any($event.target).value)"
+      >
+        @for (option of categories(); track option) {
+          <option [value]="option">
+            {{ option === allCategories ? 'All categories' : option }}
+          </option>
+        }
+      </select>
+    </div>
+
+    @if (isFiltering()) {
+      <button type="button" class="btn btn--ghost" (click)="clearFilters()">Clear filters</button>
+    }
+  </section>
+
+  <p class="results-count" role="status" aria-live="polite">
+    Showing {{ visibleProducts().length }} of {{ totalCount() }} products
+  </p>
+
+  @if (visibleProducts().length > 0) {
+    <ul class="product-grid" role="list">
+      @for (product of visibleProducts(); track product.id) {
+        <li><app-product-card [product]="product" /></li>
+      }
+    </ul>
+  } @else {
+    <div class="empty-state card">
+      <p>No products match your filters.</p>
+      <button type="button" class="btn btn--ghost" (click)="clearFilters()">Clear filters</button>
+    </div>
+  }
+</app-async-state>

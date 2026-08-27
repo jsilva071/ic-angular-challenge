@@ -1,0 +1,42 @@
+.async-state {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-6);
+  justify-content: center;
+  color: var(--color-text-muted);
+}
+
+.async-state--error {
+  flex-direction: column;
+  text-align: center;
+  background: var(--color-danger-surface);
+  border: 1px solid var(--color-danger);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+}
+
+.async-state__title {
+  font-weight: 700;
+  margin: 0;
+}
+
+.async-state__detail {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.async-state__spinner {
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: async-state-spin 0.8s linear infinite;
+}
+
+@keyframes async-state-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

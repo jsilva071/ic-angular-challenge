@@ -1,0 +1,22 @@
+<article class="product-card card">
+  <div class="product-card__media">
+    <img [src]="product().image" alt="" loading="lazy" decoding="async" width="240" height="240" />
+  </div>
+
+  <div class="product-card__body">
+    <p class="product-card__category">{{ product().category }}</p>
+
+    <h3 class="product-card__title">
+      <a [routerLink]="['/products', product().id]">{{ product().title }}</a>
+    </h3>
+
+    <app-star-rating [rate]="product().rating.rate" [count]="product().rating.count" />
+
+    <p class="product-card__description">{{ product().description }}</p>
+
+    <p class="product-card__price">
+      <span class="sr-only">Price:</span>
+      {{ product().price | currency: 'USD' }}
+    </p>
+  </div>
+</article>

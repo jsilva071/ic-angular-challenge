@@ -1,0 +1,22 @@
+.star-rating {
+  display: inline-flex;
+  gap: 2px;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.star-rating__star {
+  color: var(--color-border);
+}
+
+.star-rating__star--full {
+  color: var(--color-star);
+}
+
+/* Half star: gold left half, muted right half. */
+.star-rating__star--half {
+  background: linear-gradient(90deg, var(--color-star) 50%, var(--color-border) 50%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
